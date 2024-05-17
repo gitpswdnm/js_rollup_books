@@ -4,4 +4,10 @@
 	justify-content: center;
 	font-style: 16px;
 	padding: 30px;
+} 
+
+.card_grid{
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 30px; 
 }

@@ -1,0 +1,41 @@
+
+.footer{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+	& > button{
+		border: none; 
+		background: none;
+		font-size: 16px;  
+		display: flex;
+		justify-content: center;
+		align-items: center; 
+		gap: 5px; 
+		cursor: pointer; 
+
+		&:active {
+			color: gray;
+		}  
+	}
+ 
+ 
+}
+
+.arrow{
+	border: solid black;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
+}
+
+.next_arrow{ 
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	
+} 
+ 
+.prev_arrow{
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+}
+

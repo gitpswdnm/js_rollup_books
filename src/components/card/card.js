@@ -25,17 +25,17 @@ export class Card extends DivComponent {
 		);
 		this.el.innerHTML = `
 		<div class="card__image">
-		<img src="https://covers.openlibrary.org/b/olid/${this.cardState.cover_edition_key}-M.jpg" alt="book cover">
+		<img src="https://covers.openlibrary.org/b/olid/${this.cardState.cover_edition_key}-M.jpg" alt="book cover" loading="lazy"">
 	</div>
 	<div class="card__info">
 		<div class="card__tag">
-				${this.cardState.subject ? this.cardState.subject[0] : 'Not specified'}
-		</div>
-		<div class="card__name">  
+				${this.cardState.subject ? this.cardState.subject[0] : 'Tag is not specified'}
+		</div>  
+		<div class="card__name">   
 				${this.cardState.title}
 		</div>
 		<div class="card__author">
-				${this.cardState.author_name ? this.cardState.author_name[0] : 'Not specified'}
+				${this.cardState.author_name ? this.cardState.author_name[0] : 'Author is not specified'}
 		</div>
 		<div class="card__footer">
 			<button id="fav_btn" class="button__add ${existInFavorites ? 'button__active' : ''}">

@@ -3,6 +3,7 @@ import { AbstractView } from '../../common/view.js';
 import { Header } from '../../components/header/header.js';
 import { Search } from '../../components/search/search.js';
 import { CardList } from '../../components/card-list/card-list.js';
+import { Footer } from '../../components/footer/footer.js';
 
 export class MainView extends AbstractView {
 	state = {
@@ -11,6 +12,7 @@ export class MainView extends AbstractView {
 		loading: false,
 		searchQuery: undefined,
 		offset: 0,
+		limit: 6,
 	};
 	constructor(appState) {
 		super();
@@ -20,6 +22,11 @@ export class MainView extends AbstractView {
 		this.setTitle('Search books');
 	}
 
+	destroy() {
+		onChange.unsubscribe(this.appState);
+		onChange.unsubscribe(this.state);
+	}
+
 	appStateHook(path) {
 		if (path === 'favorites') {
 			this.render();
@@ -27,11 +34,19 @@ export class MainView extends AbstractView {
 	}
 
 	async stateHook(path) {
-		if (path === 'searchQuery') {
+		if (path === 'searchQuery' || path === 'offset') {
+			if (!this.state.searchQuery) {
+				return;
+			}
 			this.state.loading = true;
-			const data = await this.loadList(this.state.searchQuery, this.state.offset);
+			const data = await this.loadList(
+				this.state.searchQuery,
+				this.state.offset,
+				this.state.limit,
+			);
 			this.state.loading = false;
 			this.state.numFound = data.numFound;
+			console.log(data);
 			this.state.list = data.docs;
 		}
 
@@ -40,17 +55,22 @@ export class MainView extends AbstractView {
 		}
 	}
 
-	async loadList(q, offset) {
+	async loadList(query, offset, limit) {
+		const q = query.split(' ').join('+');
 		const res = await fetch(
-			`https://openlibrary.org/search.json?q=${q}&offset=${offset}`,
+			`https://openlibrary.org/search.json?q=${q}&offset=${offset}&limit=${limit}`,
 		);
 		return res.json();
 	}
 
 	render() {
 		const main = document.createElement('div');
+		const text = document.createElement('h2');
+		text.textContent = `${this.state.numFound} books`;
 		main.append(new Search(this.state).render());
+		main.append(text);
 		main.append(new CardList(this.appState, this.state).render());
+		main.append(new Footer(this.state).render());
 		this.app.innerHTML = '';
 		this.app.append(main);
 		this.renderHeader();

@@ -1,11 +1,39 @@
-.card {
+.skeleton {
+	position: relative;
+	box-shadow: 0 2px 10px 0 black;
+	overflow: hidden;
+
+	& ::before {
+		content: "";
+		position: absolute;
+		left: -150px;
+		top: 0;
+		height: 100%;
+		width: 80%;
+		background: linear-gradient( to right, transparent 0%, gray, transparent 100%);
+		animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+	}
+}
+@keyframes load {
+	from {
+		left: -700px;
+	}
+	
+	to {
+		left: 100%;
+	}
+}
+
+.card_skeleton {
 	display: flex;
-	flex-direction: column;
+	flex-direction: column; 
 	border-radius: 8px;
 	overflow: hidden;
 }
 
-.card__image {
+
+ 
+.card_skeleton__image {
 	background: #b8b8b8;
 	display: flex;
 	padding-top: 10px;
@@ -14,7 +42,7 @@
 	height: 180px;
 }
 
-.card__info{
+.card_skeleton__info{
 	display: flex;
 	flex-direction: column;
 	background:var(--black);
@@ -23,32 +51,32 @@
 	min-height: 130px;
 }
 
-.card__tag{
+.card_skeleton__tag{
 	font-weight: 300;
 	font-size: 11px;
 	line-height: 15px;
 	margin-bottom: 3px;
 }
 
-.card__name{
+.card_skeleton__name{
 	font-weight: 600;
 	font-size: 15px;
 	line-height: 110%;
 	margin-bottom: 8px;
 }
 
-.card__author{
+.card_skeleton__author{
 	font-weight: 400;
 	font-size: 11px;
 	line-height: 15px;
 }
 
-.card__footer{
+.card_skeleton__footer{
 	margin-top: auto;
 	display: flex;
 }
 
-.button__add{
+.button_skeleton__add{
 	border-radius: 6px;
 	width: 36px;
 	height: 32px;
@@ -60,6 +88,6 @@
 	cursor: pointer;
 }
 
-.button__active {
+.button_skeleton__active {
 	background: var(--white);
 }

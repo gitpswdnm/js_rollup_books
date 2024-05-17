@@ -1,5 +1,6 @@
 import { DivComponent } from '../../common/div-component';
 import { Card } from '../../components/card/card.js';
+import { CardSkeleton } from '../card-skelton/card-skeleton.js';
 import './card-list.css';
 
 export class CardList extends DivComponent {
@@ -10,20 +11,24 @@ export class CardList extends DivComponent {
 	}
 
 	render() {
-		if (this.parentState.loading) {
-			this.el.innerHTML = `<div class='card_list__loader'>Loading...</div>`;
-			return this.el;
-		}
-		this.el.classList.add('card_list');
-		this.el.innerHTML = `
-			<h1 class='card__qty'>
-			${this.parentState.numFound} books
-			</h1>
-		`;
+		// if (this.parentState.loading) {
+		// 	this.el.innerHTML = `<div class='card_list__loader'>Loading...</div>`;
+		// 	return this.el;
+		// }
 
-		this.parentState.list.forEach((book) => {
-			this.el.append(new Card(this.appState, book).render());
-		});
+		const cardGrid = document.createElement('div');
+		cardGrid.classList.add('card_grid');
+		if (this.parentState.loading) {
+			for (let i = 0; i < this.parentState.limit; i++) {
+				cardGrid.append(new CardSkeleton().render());
+				continue;
+			}
+		} else {
+			this.parentState.list.forEach((book) => {
+				cardGrid.append(new Card(this.appState, book).render());
+			});
+		}
+		this.el.append(cardGrid);
 
 		return this.el;
 	}

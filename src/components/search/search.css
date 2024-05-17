@@ -2,11 +2,11 @@
 	display: flex;
 	width: 100%;
 	gap: 10px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 
 	&>button{
 		border: none;
-		background: var(--black);
+		background: var(--black);   
 		border-radius: 5px;
 		display: flex;
 		align-items: center;
