@@ -35,6 +35,14 @@ export class MainView extends AbstractView {
 
 	async stateHook(path) {
 		if (path === 'searchQuery' || path === 'offset') {
+			const currentOffset = this.state.offset;
+			if (path === 'searchQuery') {
+				this.state.offset = 0;
+			}
+			if (this.state.offset !== currentOffset) {
+				console.log('query changed');
+				return;
+			}
 			if (!this.state.searchQuery) {
 				return;
 			}

@@ -24,7 +24,7 @@
 	}
 }
 
-.card_skeleton {
+/* .card_skeleton {
 	display: flex;
 	flex-direction: column; 
 	border-radius: 8px;
@@ -90,4 +90,4 @@
 
 .button_skeleton__active {
 	background: var(--white);
-}
+} */
